@@ -50,11 +50,12 @@ class SquareBot(Bot):
         (English) When the bot is ready
         """
 
-        # Mostrando no terminal uma mensagem bonitinha
+        # Sincronizando os slashs
         if not self.synced:
 
             await self.tree.sync()
             self.synced = True
-            
+
+        # Colocando a mensagem bonitinha 
         print("Sou {} e estou pronto pra uso".format(self.user.name))
 
