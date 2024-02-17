@@ -3,8 +3,8 @@
 (English) Here will be your tokens, do not share with no one
 """
 
-# Token do bot do discord
-token_bot = ""
+# Coloque o Token entre as aspas
+token_bot = "Token_Here"
 
-# Token do Squarecloud
-squarecloud_token = ""
+# Coloque o token da square aqui
+squarecloud_token = "Token_Here"

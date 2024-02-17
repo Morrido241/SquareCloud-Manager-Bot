@@ -37,6 +37,7 @@ class SquareBot(Bot):
                 print("Ocorreu um erro ao carregar a cog.")
                 raise error
         
+        # Mostrando os cogs carregados 
         print("Cogs carregados -> {}".format(", ".join(self.cogs.keys())))
 
         
@@ -45,6 +46,7 @@ class SquareBot(Bot):
 
         """
         (Português)Quando o bot vai ligar e está pronto pra uso
+        (English) When the bot is ready
         """
 
         # Mostrando no terminal uma mensagem bonitinha
