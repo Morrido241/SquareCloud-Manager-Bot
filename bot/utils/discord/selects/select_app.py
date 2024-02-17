@@ -1,7 +1,8 @@
-from discord import Interaction
+from discord import Interaction, Embed
 from discord.ui import Select
 
 from ...squarecloud.connection import squarefunctions
+from ..views.app import AppView
 
 
 class SelectApp(Select):
@@ -21,4 +22,34 @@ class SelectApp(Select):
         Callback do Select
         """
 
-        pass
+        view, square_app, app_status = await app_view(self.values[0])
+
+        status = await app_status(self.values[0])
+        app = await square_app(self.values[0])
+
+        description = \
+            f"**RAM**: {status.ram}\n"\
+            f"**CPU**: {status.cpu}\n"\
+            f"**NETWORK**: {status.network['now']}\n"\
+            f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
+            f"**STORAGE**: {status.storage}\n"\
+            f"**UPTIME**: {status.time}"
+        embed = Embed(
+            title=app.tag,
+            description=description
+        )
+
+        await interaction.response.send_message(embed=embed, view=view)
+
+
+async def app_view(app_id: str):
+
+    """
+    (Português) Esta função apenas constroi a View
+    (English) This function just builds the View
+    """
+    
+    square_apps, square_app, app_status = await squarefunctions()
+    view = AppView(app_id, square_app)
+
+    return view, square_app, app_status

@@ -8,21 +8,23 @@ class AppView(ui.View):
     (English) This is the app view
     """
 
-    def __init__(self) -> None:
+    def __init__(self, app_id: str, connection) -> None:
 
         super().__init__(timeout=360)
+        self.app_id = app_id
+        self.square = connection
 
-    @ui.button()
+    @ui.button(label='start')
     async def button_1(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
-        (Português) Este botão para sua aplicação
-        (English) This button Stop the app
+        (Português) Este botão inicia o app
+        (English) This button start the app
         """
 
         pass
 
-    @ui.button()
+    @ui.button(label='restart')
     async def button_2(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
@@ -32,17 +34,17 @@ class AppView(ui.View):
 
         pass
 
-    @ui.button()
+    @ui.button(label="stop")
     async def button_3(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
-        (Português) Este botão inicia o app
-        (English) This button start the app
+        (Português) Este botão para sua aplicação
+        (English) This button Stop the app
         """
 
         pass
 
-    @ui.button()
+    @ui.button(label="Terminal")
     async def button_4(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
@@ -52,7 +54,7 @@ class AppView(ui.View):
 
         pass
 
-    @ui.button()
+    @ui.button(label="backup")
     async def button_5(self, interaction: Interaction, button: ui.Button) -> None:
 
         """

@@ -1,7 +1,7 @@
 from typing import Coroutine, Any
 from asyncio import create_task, run
 
-from .discord import InitialView, SelectApp, AppView
+from .discord import InitialView, SelectApp
 from .squarecloud.connection import squarefunctions
 
 from discord import SelectOption
@@ -18,7 +18,7 @@ async def initial_view() -> Coroutine[Any, Any, InitialView]:
     get_apps = await squarefunctions()
     
     # Criando a lista do Select contendo as aplicações 
-    square_apps = [SelectOption(label=app.tag, description=app.desc, value=app.id) for app in await get_apps()]
+    square_apps = [SelectOption(label=app.tag, description=app.desc, value=app.id) for app in await get_apps[0]()]
 
     # Cria o select e o view
     if len(square_apps) <= 25:
@@ -33,11 +33,3 @@ async def initial_view() -> Coroutine[Any, Any, InitialView]:
     return view
 
 
-async def app_view() -> Coroutine[Any, Any, AppView]:
-
-    """
-    (Português) Esta função apenas constroi a View
-    (English) This function just builds the View
-    """
-    
-    

@@ -41,8 +41,6 @@ class SquareCommands(Cog):
         await interaction.response.send_message(embed=embed, view=view)
 
 
-
-
 async def setup(client: Bot) -> None:
 
     """Setup necessário pro bot carregar o cog"""
