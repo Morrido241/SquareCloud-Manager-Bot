@@ -14,7 +14,8 @@ class SquareBot(Bot):
     def __init__(self) -> None:
 
         # Inicializando a class Bot
-        super().__init__(command_prefix='', intents=Intents.default())
+        super().__init__(command_prefix='.', intents=Intents.default())
+        self.synced = False
 
     async def setup_hook(self) -> None:
         
@@ -24,13 +25,13 @@ class SquareBot(Bot):
         """
 
         # Puxando os arquivos com os comandos
-        for file in listdir('./cogs'):
+        for files in listdir('./bot/cogs/'):
            
             try:
 
-                if file.endswith('.py'):
+                if files.endswith('.py'):
 
-                    await self.load_extension('cogs.{}'.format(file[:-3]))
+                    await self.load_extension('bot.cogs.{}'.format(files[:-3]))
 
             except Exception as error:
 
@@ -50,5 +51,10 @@ class SquareBot(Bot):
         """
 
         # Mostrando no terminal uma mensagem bonitinha
+        if not self.synced:
+
+            await self.tree.sync()
+            self.synced = True
+            
         print("Sou {} e estou pronto pra uso".format(self.user.name))
 

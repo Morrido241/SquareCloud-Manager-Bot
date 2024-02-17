@@ -8,6 +8,6 @@ async def squarefunctions():
 
     async def get_apps():
 
-        yield await connection.all_apps()
+        return await connection.all_apps()
 
     return get_apps

@@ -1,6 +1,6 @@
 from discord import ui
 
-from ..selects import *
+from ..selects.select_app import SelectApp
 
 
 class InitialView(ui.View):
@@ -10,9 +10,11 @@ class InitialView(ui.View):
     (English) This View holds all buttons for initial interactions
     """
 
-    def __init__(self) -> None:
+    def __init__(self, select: SelectApp) -> None:
 
-        pass
+        super().__init__(timeout=360)
+        self.select = select
+        self.add_item(select)
 
     
 

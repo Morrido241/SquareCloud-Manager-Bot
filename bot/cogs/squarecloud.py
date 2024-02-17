@@ -1,7 +1,9 @@
 from discord.ext.commands import Cog, Bot
 from discord import app_commands, Interaction, Embed, Colour
+
 from random import choice
-from ..utils.discord import InitialView
+
+from ..utils import initial_view
 
 
 class SquareCommands(Cog):
@@ -34,7 +36,7 @@ class SquareCommands(Cog):
         )
 
         # View
-        view = InitialView(timeout=360)
+        view = await initial_view()
 
         await interaction.response.send_message(embed=embed, view=view)
 

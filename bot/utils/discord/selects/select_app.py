@@ -11,11 +11,9 @@ class SelectApp(Select):
     (English) the Select of the apps
     """
 
-    def __init__(self) -> None:
+    def __init__(self, options) -> None:
 
-        options = [
-            
-        ]
+        super().__init__(placeholder="Select your app", options=options, row=0)
 
     async def callback(self, interaction: Interaction) -> None:
         

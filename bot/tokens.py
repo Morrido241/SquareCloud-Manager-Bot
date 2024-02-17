@@ -4,7 +4,7 @@
 """
 
 # Coloque o Token entre as aspas
-token_bot = "Token_Here"
+token_bot = "Token_here"
 
 # Coloque o token da square aqui
-squarecloud_token = "Token_Here"
+squarecloud_token = "Token_here"
