@@ -25,7 +25,7 @@ class SquareCommands(Cog):
 
         # Definindo a descrição
         description = (
-            ""
+            "Welcome, what application you want to acess"
         )
 
         # Definindo a embed

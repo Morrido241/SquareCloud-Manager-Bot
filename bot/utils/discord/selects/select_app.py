@@ -50,6 +50,6 @@ async def app_view(app_id: str):
     """
     
     square_apps, square_app, app_status = await squarefunctions()
-    view = AppView(app_id, square_app)
+    view = AppView(app_id, (square_app, app_status))
 
     return view, square_app, app_status
