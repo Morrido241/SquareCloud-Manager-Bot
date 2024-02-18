@@ -32,7 +32,7 @@ class AppView(ui.View):
 
         status = await app.status()
         description = \
-            f"**ID**: {app.tag}\n"\
+            f"**ID**: {self.app_id}\n"\
             f"**RAM**: {status.ram}\n"\
             f"**CPU**: {status.cpu}\n"\
             f"**NETWORK**: {status.network['now']}\n"\
@@ -66,7 +66,7 @@ class AppView(ui.View):
 
         status = await app.status()
         description = \
-            f"**ID**: {app.tag}\n"\
+            f"**ID**: {self.app_id}\n"\
             f"**RAM**: {status.ram}\n"\
             f"**CPU**: {status.cpu}\n"\
             f"**NETWORK**: {status.network['now']}\n"\
@@ -96,7 +96,7 @@ class AppView(ui.View):
 
         status = await app.status()
         description = \
-            f"**ID**: {app.tag}\n"\
+            f"**ID**: {self.app_id}\n"\
             f"**RAM**: {status.ram}\n"\
             f"**CPU**: {status.cpu}\n"\
             f"**NETWORK**: {status.network['now']}\n"\
