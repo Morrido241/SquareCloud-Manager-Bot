@@ -1,4 +1,4 @@
-from discord import ui, Interaction
+from discord import ui, Interaction, ButtonStyle, Embed
 
 from squarecloud.client import Application
 from ...squarecloud.connection import connection
@@ -17,9 +17,7 @@ class AppView(ui.View):
         self.app_id = app_id
         self.square = connection
 
-        ...
-
-    @ui.button(label='start')
+    @ui.button(label='start', row=0, style=ButtonStyle.blurple)
     async def button_1(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
@@ -30,11 +28,30 @@ class AppView(ui.View):
         await interaction.response.defer()
 
         app: Application = await self.square[0](self.app_id)
-        response = await app.start()
+        await app.start()
 
-        await interaction.channel.send("Done!")
+        status = await app.status()
+        description = \
+            f"**ID**: {app.tag}\n"\
+            f"**RAM**: {status.ram}\n"\
+            f"**CPU**: {status.cpu}\n"\
+            f"**NETWORK**: {status.network['now']}\n"\
+            f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
+            f"**STORAGE**: {status.storage}\n"
+        
+        embed = Embed(
+            title=app.tag,
+            description=description
+        )
 
-    @ui.button(label='restart')
+
+        button.disabled = True
+        self.button_3.disabled = False
+        await interaction.message.edit(embed=embed, view=self)
+
+        await interaction.channel.send("Done!", delete_after=35)
+ 
+    @ui.button(label='restart', row=0, style=ButtonStyle.blurple)
     async def button_2(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
@@ -45,11 +62,26 @@ class AppView(ui.View):
         await interaction.response.defer()
 
         app: Application = await self.square[0](self.app_id)
-        response = await app.restart()
+        await app.restart()
 
-        await interaction.channel.send("Done!")
+        status = await app.status()
+        description = \
+            f"**ID**: {app.tag}\n"\
+            f"**RAM**: {status.ram}\n"\
+            f"**CPU**: {status.cpu}\n"\
+            f"**NETWORK**: {status.network['now']}\n"\
+            f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
+            f"**STORAGE**: {status.storage}\n"
+        
+        embed = Embed(
+            title=app.tag,
+            description=description
+        )
 
-    @ui.button(label="stop")
+        await interaction.message.edit(embed=embed)
+        await interaction.channel.send("Done!", delete_after=35)
+
+    @ui.button(label="stop", row=0, style=ButtonStyle.red)
     async def button_3(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
@@ -60,12 +92,30 @@ class AppView(ui.View):
         await interaction.response.defer()
 
         app: Application = await self.square[0](self.app_id)
-        response = await app.stop()
+        await app.stop()
 
-        await interaction.channel.send("Done!")
+        status = await app.status()
+        description = \
+            f"**ID**: {app.tag}\n"\
+            f"**RAM**: {status.ram}\n"\
+            f"**CPU**: {status.cpu}\n"\
+            f"**NETWORK**: {status.network['now']}\n"\
+            f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
+            f"**STORAGE**: {status.storage}\n"
+        
+        embed = Embed(
+            title=app.tag,
+            description=description
+        )
+
+        button.disabled = True
+        self.button_1.disabled = False
+        await interaction.message.edit(embed=embed,view=self)
+
+        await interaction.channel.send("Done!", delete_after=35)
 
 
-    @ui.button(label="Terminal")
+    @ui.button(label="Terminal", row=1, style=ButtonStyle.gray)
     async def button_4(self, interaction: Interaction, button: ui.Button) -> None:
 
         """
@@ -76,11 +126,12 @@ class AppView(ui.View):
         await interaction.response.defer()
         msg = await interaction.channel.send("Wait a few seconds!")
 
-        logs = await connection.get_logs(self.app_id)
+        request = await connection._http.fetch_logs(self.app_id)
+        logs = request.response.get("logs")
         
-        await msg.edit(content=">>> {logs.logs}")
+        await msg.edit(content=f">>> ```{logs}```")
 
-    @ui.button(label="backup")
+    @ui.button(label="backup", row=1)
     async def button_5(self, interaction: Interaction, button: ui.Button) -> None:
 
         """

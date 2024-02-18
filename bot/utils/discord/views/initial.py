@@ -15,7 +15,3 @@ class InitialView(ui.View):
         super().__init__(timeout=360)
         self.select = select
         self.add_item(select)
-
-    
-
-    

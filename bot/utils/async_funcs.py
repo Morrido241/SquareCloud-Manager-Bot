@@ -26,6 +26,7 @@ async def initial_view() -> Coroutine[Any, Any, InitialView]:
         select = SelectApp(square_apps)
         view = InitialView(select)
 
+    # Se tiver mais que 25 apps
     else:
 
         pass
