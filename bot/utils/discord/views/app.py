@@ -37,7 +37,8 @@ class AppView(ui.View):
             f"**CPU**: {status.cpu}\n"\
             f"**NETWORK**: {status.network['now']}\n"\
             f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
-            f"**STORAGE**: {status.storage}\n"
+            f"**STORAGE**: {status.storage}\n"\
+            f"**UPTIME**: <t:{int(status.uptime)//1000}:R>"
         
         embed = Embed(
             title=app.tag,
@@ -71,7 +72,8 @@ class AppView(ui.View):
             f"**CPU**: {status.cpu}\n"\
             f"**NETWORK**: {status.network['now']}\n"\
             f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
-            f"**STORAGE**: {status.storage}\n"
+            f"**STORAGE**: {status.storage}\n"\
+            f"**UPTIME**: <t:{int(status.uptime)//1000}:R>"
         
         embed = Embed(
             title=app.tag,
@@ -101,7 +103,8 @@ class AppView(ui.View):
             f"**CPU**: {status.cpu}\n"\
             f"**NETWORK**: {status.network['now']}\n"\
             f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
-            f"**STORAGE**: {status.storage}\n"
+            f"**STORAGE**: {status.storage}\n"\
+            f"**UPTIME**: <t:{int(status.uptime)//1000}:R>"
         
         embed = Embed(
             title=app.tag,
@@ -126,10 +129,10 @@ class AppView(ui.View):
         await interaction.response.defer()
         msg = await interaction.channel.send("Wait a few seconds!")
 
-        request = await connection._http.fetch_logs(self.app_id)
-        logs = request.response.get("logs")
+        logs: Application = await self.square[0](self.app_id)
+        logs = await logs.logs()
         
-        await msg.edit(content=f">>> ```{logs}```")
+        await msg.edit(content=f">>> ```{logs.logs}```")
 
     @ui.button(label="backup", row=1)
     async def button_5(self, interaction: Interaction, button: ui.Button) -> None:

@@ -34,7 +34,8 @@ class SelectApp(Select):
             f"**CPU**: {status.cpu}\n"\
             f"**NETWORK**: {status.network['now']}\n"\
             f"**STATUS**: {'on'.upper() if status.running else 'off'.upper()}\n"\
-            f"**STORAGE**: {status.storage}\n"
+            f"**STORAGE**: {status.storage}\n"\
+            f"**UPTIME**: <t:{int(status.uptime)//1000}:R>"
         
         embed = Embed(
             title=app.tag,
