@@ -130,9 +130,18 @@ class AppView(ui.View):
         msg = await interaction.channel.send("Wait a few seconds!")
 
         logs: Application = await self.square[0](self.app_id)
-        logs = await logs.logs()
+        logsdata = await logs.logs()
+        sep_logs = logsdata.logs.splitlines(keepends=True)
         
-        await msg.edit(content=f">>> ```{logs.logs}```")
+        if len(sep_logs) <= 3:
+
+            printed_logs = "".join(sep_logs)
+
+        else:
+
+            printed_logs = "".join(sep_logs[-4:])
+        
+        await msg.edit(content=f">>> ```{printed_logs if logs.logs != '' else 'Não há logs'}```")
 
     @ui.button(label="backup", row=1)
     async def button_5(self, interaction: Interaction, button: ui.Button) -> None:

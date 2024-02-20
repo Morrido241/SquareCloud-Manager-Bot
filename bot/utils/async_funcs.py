@@ -1,7 +1,7 @@
 from typing import Coroutine, Any
 from asyncio import create_task, run
 
-from .discord import InitialView, SelectApp
+from .discord import InitialView, SelectApp, SelectGroup
 from .squarecloud.connection import squarefunctions
 
 from discord import SelectOption
@@ -29,7 +29,9 @@ async def initial_view() -> Coroutine[Any, Any, InitialView]:
     # Se tiver mais que 25 apps
     else:
 
-        pass
+        select = SelectGroup(square_apps)
+        view =  InitialView(select)
+        select.my_view = view
 
     return view
 
