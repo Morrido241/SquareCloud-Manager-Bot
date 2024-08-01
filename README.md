@@ -1,5 +1,6 @@
-This project will be updated on my other account Jhonatan-jeferson
-Este projeto será atualizado em minha outra conta Jhonatan-jeferson
+This project will be updated on my other account Jhonatan-jeferson.
+
+Este projeto será atualizado em minha outra conta Jhonatan-jeferson.
 
 
 # SquareCloud-Manager-Bot
