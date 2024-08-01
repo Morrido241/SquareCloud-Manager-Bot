@@ -1,3 +1,7 @@
+This project will be updated on my other account Jhonatan-jeferson
+Este projeto será atualizado em minha outra conta Jhonatan-jeferson
+
+
 # SquareCloud-Manager-Bot
 - Este bot do discord te ajuda a gerenciar suas aplicações que estão rodando na SquareCloud([clique aqui ler em PT-BR](https://github.com/Morrido241/SquareCloud-Manager-Bot?tab=readme-ov-file#portuguese))
 - This discord bot helps you manage your Square apps([Click here to see in English](https://github.com/Morrido241/SquareCloud-Manager-Bot?tab=readme-ov-file#english))
